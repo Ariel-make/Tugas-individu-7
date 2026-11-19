@@ -1,0 +1,55 @@
+{% extends "base_admin.html" %}
+{% block title %}Dashboard Admin{% endblock %}
+
+{% block admin_content %}
+<h1>Dashboard Admin</h1>
+<p class="result-info mono">// selamat datang, {{ profil.nama }}</p>
+
+<div class="row g-3 mb-4">
+    <div class="col-12 col-sm-4">
+        {% with label="IPK", value=stats.ipk, sub="semester 1–2", icon="🎓", color="var(--amber)" %}{% include "partials/_stat_card.html" %}{% endwith %}
+    </div>
+    <div class="col-6 col-sm-4">
+        {% with label="Total SKS", value=stats.total_sks, sub="termasuk smt 3", icon="📘", color="var(--cyan)" %}{% include "partials/_stat_card.html" %}{% endwith %}
+    </div>
+    <div class="col-6 col-sm-4">
+        {% with label="Matakuliah", value=stats.jumlah_mk, sub="selesai + berjalan", icon="📚", color="var(--red)" %}{% include "partials/_stat_card.html" %}{% endwith %}
+    </div>
+</div>
+
+<div class="chart-row">
+    <div class="panel">
+        <div class="chart-title mono">Distribusi nilai</div>
+        {% for d in dist %}
+        <div class="bar-row"><span class="lbl mono">{{ d.nilai }}</span>
+            <div class="bar-track"><div class="bar-fill" style="--w: {{ d.persen }}%"></div></div>
+            <span class="val mono">{{ d.jumlah }} mk</span></div>
+        {% endfor %}
+    </div>
+    <div class="panel">
+        <div class="chart-title mono">SKS per semester</div>
+        {% for s in sks_smt %}
+        <div class="bar-row"><span class="lbl mono">S{{ s.smt }}</span>
+            <div class="bar-track"><div class="bar-fill" style="--w: {{ (s.sks / max_sks * 100) | round }}%"></div></div>
+            <span class="val mono">{{ s.sks }}</span></div>
+        {% endfor %}
+    </div>
+</div>
+
+<div class="sect-head"><h2 class="sect-title">data nilai matakuliah</h2></div>
+<div class="table-wrap"><div class="table-responsive">
+    <table class="table grades align-middle">
+        <thead><tr><th>No</th><th>Kode</th><th>Nama Matakuliah</th><th>Smt</th><th>SKS</th><th>Nilai</th><th>N.K.</th></tr></thead>
+        <tbody>
+            {% for mk in daftar %}
+            <tr>
+                <td>{{ loop.index }}</td><td class="mono">{{ mk.kode }}</td><td>{{ mk.nama }}</td>
+                <td>{{ mk.smt }}</td><td>{{ mk.sks }}</td>
+                <td><span class="grade-pill grade-{{ mk.nilai }}">{{ mk.nilai }}</span></td>
+                <td class="mono">{{ '%.2f' | format(mk.nk) }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div></div>
+{% endblock %}

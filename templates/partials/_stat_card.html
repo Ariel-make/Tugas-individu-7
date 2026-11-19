@@ -1,0 +1,7 @@
+{# Dipanggil dengan: {% with label=..., value=..., sub=..., icon=..., color=... %}{% include %}{% endwith %} #}
+<div class="stat-card" style="--c: {{ color or 'var(--amber)' }}">
+    {% if icon %}<span class="stat-ic">{{ icon }}</span>{% endif %}
+    <div class="stat-value">{{ value }}</div>
+    <div class="stat-label">{{ label }}</div>
+    {% if sub %}<div class="stat-sub mono">{{ sub }}</div>{% endif %}
+</div>

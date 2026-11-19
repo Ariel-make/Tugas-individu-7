@@ -1,0 +1,27 @@
+/* Layout dashboard admin */
+.admin-wrap{ display:flex; min-height:calc(100vh - 46px); }
+.admin-main{ flex:1; min-width:0; padding:28px 20px 50px; }
+.admin-side{ --bs-offcanvas-bg:var(--panel); --bs-offcanvas-color:var(--text); --bs-offcanvas-width:250px; border-right:1px solid var(--line); }
+.admin-side .side-inner{ padding:22px 14px; width:100%; }
+@media (min-width:992px){ .admin-side{ width:230px; flex-shrink:0; background:var(--panel); } }
+.side-title{ color:var(--muted); font-size:.72rem; text-transform:uppercase; letter-spacing:.05em; margin:0 10px 10px; }
+.side-link{ display:block; color:var(--text); text-decoration:none; padding:9px 12px; border-radius:6px; font-size:.9rem; margin-bottom:4px; }
+.side-link:hover{ background:var(--panel-2); color:var(--amber); }
+.side-link.active{ background:var(--panel-2); color:var(--cyan); border-left:3px solid var(--cyan); }
+.btn-side{ display:inline-block; margin-bottom:16px; }
+.stat-card .stat-sub{ color:var(--muted); font-size:.72rem; margin-top:6px; }
+.admin-main h1{ font-size:1.4rem; font-weight:700; margin:0 0 4px; }
+
+/* stat card berwarna + grafik */
+.stat-card{ text-align:left; position:relative; overflow:hidden; border-top:3px solid var(--c, var(--amber)); }
+.stat-card .stat-ic{ position:absolute; right:14px; top:12px; font-size:1.8rem; opacity:.25; }
+.stat-card .stat-value{ color: var(--c, var(--amber)); }
+.chart-row{ display:grid; grid-template-columns: 1fr 1fr; gap:16px; margin-bottom:28px; }
+@media (max-width:767px){ .chart-row{ grid-template-columns:1fr; } }
+.chart-title{ font-size:.8rem; color:var(--muted); text-transform:uppercase; letter-spacing:.05em; margin-bottom:16px; }
+.bar-row{ display:flex; align-items:center; gap:10px; margin-bottom:10px; font-size:.82rem; }
+.bar-row .lbl{ width:34px; }
+.bar-track{ flex:1; background:var(--panel-2); border-radius:5px; height:14px; overflow:hidden; }
+.bar-fill{ height:100%; border-radius:5px; background:linear-gradient(90deg, var(--cyan), var(--amber)); width:0; animation: grow .9s ease forwards; }
+@keyframes grow{ to{ width: var(--w); } }
+.bar-row .val{ width:42px; text-align:right; color:var(--muted); }

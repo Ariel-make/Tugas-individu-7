@@ -1,0 +1,10 @@
+{# request.endpoint = nama fungsi route yang sedang aktif #}
+<div class="termbar">
+    <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+    <span class="path mono">ariel@profil:~$</span>
+    <nav class="menu mono">
+        <a class="nav-link-x {{ 'active' if request.endpoint == 'index' }}" href="{{ url_for('index') }}">Profil</a>
+        <a class="nav-link-x {{ 'active' if request.endpoint == 'admin_dashboard' }}" href="{{ url_for('admin_dashboard') }}">Dashboard Admin</a>
+    </nav>
+    <button type="button" id="btnTema" class="btn-x btn-tema mono">tema: gelap</button>
+</div>

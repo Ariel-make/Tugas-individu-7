@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+{% endblock %}
+
+{# Mengganti blok "layout" milik base.html dengan layout sidebar + konten #}
+{% block layout %}
+<div class="admin-wrap">
+    <aside class="offcanvas-lg offcanvas-start admin-side" tabindex="-1" id="sidebar">
+        <div class="side-inner">
+            {% include "partials/_sidebar.html" %}
+        </div>
+    </aside>
+    <main class="admin-main">
+        <button class="btn-x btn-side d-lg-none mono" type="button"
+                data-bs-toggle="offcanvas" data-bs-target="#sidebar">☰ Menu</button>
+        {% block admin_content %}{% endblock %}
+    </main>
+</div>
+{% endblock %}
