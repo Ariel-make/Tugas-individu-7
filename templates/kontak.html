@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Kontak{% endblock %}
+
+{% block content %}
+{% from "partials/_field.html" import render_field %}
+<div class="sect-head">
+    <span class="sect-tag mono">✉</span>
+    <h1 class="sect-title">hubungi saya</h1>
+</div>
+
+<div class="row">
+    <div class="col-lg-7">
+        <div class="panel">
+            <form method="post" novalidate data-bs-theme="dark" class="wtf-form">
+                {{ form.hidden_tag() }}
+                {{ render_field(form.nama, placeholder="Nama lengkap") }}
+                {{ render_field(form.email, placeholder="nama@email.com") }}
+                {{ render_field(form.telepon, placeholder="08xxxxxxxxxx") }}
+                {{ render_field(form.pesan, rows=5, placeholder="Tulis pesanmu di sini...") }}
+                <button type="submit" class="btn btn-primary">Kirim pesan</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

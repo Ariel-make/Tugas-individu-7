@@ -1,0 +1,23 @@
+{% extends "base_admin.html" %}
+{% block title %}Tambah Matakuliah{% endblock %}
+
+{% block admin_content %}
+{% from "partials/_field.html" import render_field %}
+<h1>Tambah Matakuliah</h1>
+<p class="result-info mono">// data baru akan masuk ke tabel nilai di dashboard</p>
+
+<div class="panel" style="max-width: 640px;">
+    <form method="post" novalidate data-bs-theme="dark" class="wtf-form">
+        {{ form.hidden_tag() }}
+        {{ render_field(form.kode, placeholder="14823xxx", maxlength=8) }}
+        {{ render_field(form.nama, placeholder="Contoh: Jaringan Komputer") }}
+        <div class="row">
+            <div class="col-4">{{ render_field(form.smt) }}</div>
+            <div class="col-4">{{ render_field(form.sks) }}</div>
+            <div class="col-4">{{ render_field(form.nilai) }}</div>
+        </div>
+        <button type="submit" class="btn btn-primary">Simpan</button>
+        <a href="{{ url_for('admin_dashboard') }}" class="btn btn-outline-secondary">Batal</a>
+    </form>
+</div>
+{% endblock %}

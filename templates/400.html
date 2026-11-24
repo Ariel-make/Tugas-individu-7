@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}400{% endblock %}
+{% block content %}
+<div class="panel text-center">
+    <div class="stat-value">400</div>
+    <p class="mt-3">Permintaan ditolak: token CSRF tidak valid atau hilang.</p>
+    <p class="result-info mono">{{ alasan }}</p>
+    <a class="btn-x primary" href="{{ url_for('index') }}">Kembali ke Profil</a>
+</div>
+{% endblock %}

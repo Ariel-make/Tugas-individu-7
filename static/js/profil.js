@@ -31,7 +31,6 @@ const tbodySmt3 = byId("tbodySmt3");
 const inputCari = byId("cari");
 const selSmt = byId("filterSmt");
 const selNilaiFilter = byId("filterNilai");
-const form = byId("formTambah");
 
 let kodeBaru = null;
 
@@ -43,7 +42,7 @@ function renderNilai(data) {
     }
 
     data.forEach((mk, i) => {
-        const nk = (bobot[mk.nilai] * mk.sks).toFixed(2); 
+        const nk = (bobot[mk.nilai] * mk.sks).toFixed(2);
         const tr = document.createElement("tr");
         if (mk.kode === kodeBaru) tr.classList.add("row-new");
         tr.innerHTML = `
@@ -105,10 +104,6 @@ Object.keys(bobot).forEach(n => {
     const o1 = document.createElement("option");
     o1.value = n; o1.textContent = n;
     selNilaiFilter.appendChild(o1);
-
-    const o2 = document.createElement("option");
-    o2.value = n; o2.textContent = n;
-    byId("inNilai").appendChild(o2);
 });
 
 inputCari.addEventListener("input", refresh);
@@ -141,88 +136,5 @@ $("#toggleSmt3").on("click", function () {
     });
 });
 
-function tampilPesan(teks, sukses) {
-    $("#pesanForm")
-        .stop(true, true)                        
-        .removeClass("hidden ok fail")
-        .addClass(sukses ? "ok" : "fail")
-        .text(teks)
-        .hide()
-        .fadeIn(300)
-        .delay(3500)
-        .fadeOut(400);
-}
-
-function setError(idInput, pesan) {
-    const el = byId(idInput);
-    const box = document.querySelector(`[data-err="${idInput}"]`);
-    box.textContent = pesan;
-    el.classList.toggle("is-invalid", pesan !== "");
-    el.classList.toggle("is-valid", pesan === "");
-    return pesan === "";
-}
-
-function validasiForm() {
-    const kode = byId("inKode").value.trim();
-    const nama = byId("inNama").value.trim();
-    const smt = byId("inSmt").value;
-    const sks = byId("inSks").value;
-    const nilai = byId("inNilai").value;
-
-    let ok = true;
-
-    if (!/^\d{8}$/.test(kode)) ok = setError("inKode", "Kode harus tepat 8 digit angka.") && ok;
-    else if (matakuliah.some(mk => mk.kode === kode)) ok = setError("inKode", "Kode sudah terdaftar.") && ok;
-    else setError("inKode", "");
-
-    if (nama.length < 3) ok = setError("inNama", "Nama minimal 3 karakter.") && ok;
-    else setError("inNama", "");
-
-    if (smt === "" || !Number.isInteger(Number(smt)) || Number(smt) < 1 || Number(smt) > 8)
-        ok = setError("inSmt", "Isi semester 1 - 8.") && ok;
-    else setError("inSmt", "");
-
-    if (sks === "" || !Number.isInteger(Number(sks)) || Number(sks) < 1 || Number(sks) > 6)
-        ok = setError("inSks", "Isi SKS 1 - 6.") && ok;
-    else setError("inSks", "");
-
-    if (nilai === "") ok = setError("inNilai", "Pilih nilai.") && ok;
-    else setError("inNilai", "");
-
-    return ok;
-}
-
-form.addEventListener("submit", function (e) {
-    e.preventDefault(); // cegah halaman reload
-
-    if (!validasiForm()) {
-        tampilPesan("Data belum valid, periksa kembali isian di atas.", false);
-        return;
-    }
-
-    const baru = {
-        kode: byId("inKode").value.trim(),
-        nama: byId("inNama").value.trim(),
-        smt: Number(byId("inSmt").value),
-        sks: Number(byId("inSks").value),
-        nilai: byId("inNilai").value
-    };
-    matakuliah.push(baru);
-    kodeBaru = baru.kode; 
-
-    form.reset();
-    form.querySelectorAll(".ctrl").forEach(el => el.classList.remove("is-valid", "is-invalid"));
-    form.querySelectorAll(".err-msg").forEach(el => (el.textContent = ""));
-
-    inputCari.value = "";
-    selSmt.value = "all";
-    selNilaiFilter.value = "all";
-
-    refresh();
-    tampilPesan(`"${baru.nama}" berhasil ditambahkan.`, true);
-    kodeBaru = null;
-});
-
-
-renderSemester3(); 
-refresh();         
+renderSemester3();
+refresh();

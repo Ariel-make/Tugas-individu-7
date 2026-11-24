@@ -4,6 +4,7 @@
 {% block admin_content %}
 <h1>Dashboard Admin</h1>
 <p class="result-info mono">// selamat datang, {{ profil.nama }}</p>
+<a href="{{ url_for('tambah_matakuliah') }}" class="btn btn-primary btn-sm mb-3">+ Tambah Matakuliah</a>
 
 <div class="row g-3 mb-4">
     <div class="col-12 col-sm-4">
@@ -48,6 +49,22 @@
                 <td><span class="grade-pill grade-{{ mk.nilai }}">{{ mk.nilai }}</span></td>
                 <td class="mono">{{ '%.2f' | format(mk.nk) }}</td>
             </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div></div>
+<div class="sect-head mt-4"><h2 class="sect-title">pesan masuk (dari form kontak)</h2></div>
+<div class="table-wrap"><div class="table-responsive">
+    <table class="table grades align-middle">
+        <thead><tr><th>No</th><th>Waktu</th><th>Nama</th><th>Email</th><th>Telepon</th><th>Pesan</th></tr></thead>
+        <tbody>
+            {% for p in pesan_masuk %}
+            <tr>
+                <td>{{ loop.index }}</td><td class="mono">{{ p.waktu }}</td><td>{{ p.nama }}</td>
+                <td>{{ p.email }}</td><td>{{ p.telepon }}</td><td>{{ p.pesan }}</td>
+            </tr>
+            {% else %}
+            <tr><td colspan="6" class="text-center">Belum ada pesan.</td></tr>
             {% endfor %}
         </tbody>
     </table>

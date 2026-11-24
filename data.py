@@ -72,3 +72,7 @@ def hitung_ipk(data):
 def nilai_dengan_nk(data):
     """Salinan data + kolom N.K. (bobot x sks) agar template tidak perlu menghitung."""
     return [{**mk, "nk": BOBOT[mk["nilai"]] * mk["sks"]} for mk in data]
+
+
+# Tempat menyimpan pesan dari form kontak (hilang saat server restart, cukup untuk demo)
+pesan_masuk = []

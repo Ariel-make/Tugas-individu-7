@@ -1,3 +1,4 @@
 <p class="side-title mono">Admin panel</p>
 <a class="side-link {{ 'active' if request.endpoint == 'admin_dashboard' }}" href="{{ url_for('admin_dashboard') }}">📊 Dashboard</a>
+<a class="side-link {{ 'active' if request.endpoint == 'tambah_matakuliah' }}" href="{{ url_for('tambah_matakuliah') }}">➕ Tambah Matakuliah</a>
 <a class="side-link {{ 'active' if request.endpoint == 'index' }}" href="{{ url_for('index') }}">👤 Kembali ke Profil</a>

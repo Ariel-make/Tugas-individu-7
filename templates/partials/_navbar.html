@@ -5,6 +5,7 @@
     <nav class="menu mono">
         <a class="nav-link-x {{ 'active' if request.endpoint == 'index' }}" href="{{ url_for('index') }}">Profil</a>
         <a class="nav-link-x {{ 'active' if request.endpoint == 'admin_dashboard' }}" href="{{ url_for('admin_dashboard') }}">Dashboard Admin</a>
+        <a class="nav-link-x {{ 'active' if request.endpoint == 'kontak' }}" href="{{ url_for('kontak') }}">Kontak</a>
     </nav>
     <button type="button" id="btnTema" class="btn-x btn-tema mono">tema: gelap</button>
 </div>
